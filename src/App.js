@@ -1,12 +1,6 @@
 import './App.css';
 import WaveSurfer from 'wavesurfer.js';
-import {
-  useRef,
-  useState
-} from 'react';
-import {
-  analyze
-} from 'web-audio-beat-detector';
+import {useRef, useState} from 'react';
 
 const App = () => {
   var context = null;
@@ -16,12 +10,9 @@ const App = () => {
   const waveformRef1 = useRef(null);
   const waveformRef2 = useRef(null);
   const waveformRef3 = useRef(null);
-  // const [array, setArray] = useState([]);
   const [array1, setArray1] = useState([]);
   const [array2, setArray2] = useState([]);
   const [array3, setArray3] = useState([]);
-
-  const bpm = useRef();
 
   const handlePlayPause = () => {
     setPlaying(!playing)
@@ -43,24 +34,7 @@ const App = () => {
     const file = e.target.files[0]
     if (file) {
       try {
-        // also create webaudio from array buffer (not needed here)
-        const arrayBuffer = await file.arrayBuffer();
-        const audioBuffer = await context.decodeAudioData(arrayBuffer);
-        bpm.current = await analyze(audioBuffer);
-      } catch (e) {
-        // console.log(e.message);
-        if (
-          e.message ===
-          "The given channelData does not contain any detectable beats."
-        ) {
-          console.log(e.message);
-          bpm.current = "-";
-        }
-      }
-
-      try {
         // get peaks (must use a new, undetached array buffer from same file)
-        //newArrBuff: WaveformData Array
         const newArrBuff = await file.arrayBuffer();
         console.log(newArrBuff);
         let blob = new Blob([new Uint8Array(newArrBuff)], {
@@ -69,7 +43,6 @@ const App = () => {
         console.log(blob);
 
         // load url, filepath or blob
-        // ws.current.load("/out.mp3");
         waveformRef.current.loadBlob(blob);
       } catch (e) {
         console.log(e);
@@ -138,11 +111,11 @@ const App = () => {
       /> 
       <button onClick={handlePlayPause}> {playing ? "Pause" : "Play"} </button> 
       {/* <button onClick={startCalc}>calc</button> */}
-      <p >n = 1</p> 
+      <p>n = 1</p> 
       <div ref={waveformRef1}/> 
-      <p >n = 2</p> 
+      <p>n = 2</p> 
       <div ref={waveformRef2}/> 
-      <p >n = 3</p> 
+      <p>n = 3</p> 
       <div ref={waveformRef3}/> 
     </div>
   );
