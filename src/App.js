@@ -1,8 +1,6 @@
 import './App.css';
 import WaveSurfer from 'wavesurfer.js';
 import { useRef, useState } from 'react';
-// import { render } from "react-dom";
-// import { ReactDOM } from 'react';
 
 const App = () => {
   var context = null;
@@ -34,6 +32,48 @@ const App = () => {
     }
     const file = e.target.files[0]
     if (file) {
+
+      // try {
+      //   // also create webaudio from array buffer (not needed here)
+      //   const arrayBuffer = await file.arrayBuffer();
+      //   const audioBuffer = await context.decodeAudioData(arrayBuffer);
+      //   bpm.current = await analyze(audioBuffer);
+      // } catch (e) {
+      //   // console.log(e.message);
+      //   if (
+      //     e.message ===
+      //     "The given channelData does not contain any detectable beats."
+      //   ) {
+      //     console.log(e.message);
+      //     bpm.current = "-";
+      //   }
+      // }
+
+      // try {
+      //   // get peaks (must use a new, undetached array buffer from same file)
+      //   const newArrBuff = await file.arrayBuffer();
+      //   let blob = new Blob([new Uint8Array(newArrBuff)], { type: file.type });
+      //   console.log(blob);
+
+      //   // load url, filepath or blob
+      //   // ws.current.load("/out.mp3");
+      //   waveformRef.current.loadBlob(blob);
+      // } catch (e) {
+      //   console.log(e);
+      // }
+    
+  // //
+  //       const fileReader = new FileReader()
+  //       fileReader.onload = () => {
+  //         // fileReader.resultにデータが入る
+  //         console.log(fileReader.result);
+  //       }
+  //       //set the raw value to array
+  //       setArray(fileReader.readAsArrayBuffer(file));
+      
+  //       //show the raw audio waveform
+  //       waveformRef.current.load({peaks: array});
+  // //
         const fileUrl = URL.createObjectURL(file)
 
         //show the raw audio waveform
